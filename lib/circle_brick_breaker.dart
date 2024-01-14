@@ -50,13 +50,12 @@ class GameControllerComponent extends RectangleComponent {
 }
 
 class GameViewComponent extends RectangleComponent {
-  final Vector2 parentSize;
-
   GameViewComponent(this.parentSize) {
     size = Vector2(parentSize.x, parentSize.y / 2);
     position = Vector2(0, 0);
     paint = Paint()..color = const Color(0xFF07aaf0);
   }
+  final Vector2 parentSize;
 }
 
 class DragCircleComponent extends CircleComponent with DragCallbacks {
