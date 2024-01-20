@@ -20,3 +20,12 @@ Rad findAngle(Vector2 firstVector, Vector2 secondVector) {
 extension ConvertToDegrees on Rad {
   double toDegrees() => this * 180 / pi;
 }
+
+extension NormalizedRadians on Rad {
+  Rad normalize() {
+    if (this < 0) {
+      return this + 2 * pi;
+    }
+    return this;
+  }
+}
