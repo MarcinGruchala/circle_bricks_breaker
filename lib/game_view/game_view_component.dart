@@ -24,7 +24,7 @@ class GameViewComponent extends RectangleComponent
   void onNewState(GameControllerState state) {
     controllerPosition = state.position;
     textComponent.text =
-        controllerPosition.normalize().toDegrees().toStringAsFixed(2);
+        controllerPosition.normalize().toStringAsFixed(2);
   }
 
   @override
