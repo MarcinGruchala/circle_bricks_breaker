@@ -17,8 +17,10 @@ class GameViewComponent extends RectangleComponent
   }
   final Vector2 parentSize;
   Rad controllerPosition = 0.0;
+
   late BounceBackPlatform bounceBackPlatform;
   late CircleComponent gameCircleComponent;
+  late CircleComponent bounceBackCircleComponent;
 
   @override
   void onNewState(GameControllerState state) {
@@ -30,6 +32,8 @@ class GameViewComponent extends RectangleComponent
   @override
   FutureOr<void> onLoad() {
     final gameCircleRadius = size.x / 2.5;
+    final bounceBackCircleRadius = gameCircleRadius / 5;
+
     final centerX = size.x / 2;
     final centerY = size.y / 1.8;
 
@@ -39,6 +43,13 @@ class GameViewComponent extends RectangleComponent
       paint: Paint()..color = cbrWhite,
     );
 
+    bounceBackCircleComponent = CircleComponent(
+      position: Vector2(
+          centerX - bounceBackCircleRadius, centerY - bounceBackCircleRadius),
+      radius: bounceBackCircleRadius,
+      paint: Paint()..color = cbrGrey,
+    );
+
     bounceBackPlatform = BounceBackPlatform(
       position: Vector2(centerX - gameCircleRadius, centerY - gameCircleRadius),
       radius: gameCircleRadius,
@@ -46,6 +57,10 @@ class GameViewComponent extends RectangleComponent
       platformSize: radFromDegrees(30),
     );
 
-    addAll([gameCircleComponent, bounceBackPlatform]);
+    addAll([
+      gameCircleComponent,
+      bounceBackCircleComponent,
+      bounceBackPlatform,
+    ]);
   }
 }
