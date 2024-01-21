@@ -2,10 +2,10 @@ import 'dart:async';
 import 'dart:ui' hide TextStyle;
 
 import 'package:circle_bricks_breaker/game_controller/bloc/game_controller_bloc.dart';
+import 'package:circle_bricks_breaker/game_view/bounce_back_platform.dart';
+import 'package:circle_bricks_breaker/theme/colors.dart';
 import 'package:circle_bricks_breaker/utils/angles.dart';
 import 'package:flame/components.dart';
-import 'package:flame/palette.dart';
-import 'package:flame/text.dart';
 import 'package:flame_bloc/flame_bloc.dart';
 
 class GameViewComponent extends RectangleComponent
@@ -13,35 +13,39 @@ class GameViewComponent extends RectangleComponent
   GameViewComponent(this.parentSize) {
     size = Vector2(parentSize.x, parentSize.y / 2);
     position = Vector2(0, 0);
-    paint = Paint()..color = const Color(0xFF07aaf0);
+    paint = Paint()..color = cbrBlue;
   }
   final Vector2 parentSize;
-
   Rad controllerPosition = 0.0;
-  late TextComponent textComponent;
+  late BounceBackPlatform bounceBackPlatform;
+  late CircleComponent gameCircleComponent;
 
   @override
   void onNewState(GameControllerState state) {
     controllerPosition = state.position;
-    textComponent.text =
-        controllerPosition.normalize().toStringAsFixed(2);
+
+    bounceBackPlatform.anglePosition = controllerPosition;
   }
 
   @override
   FutureOr<void> onLoad() {
-    textComponent = TextComponent(
-      text: '$controllerPosition',
-      position: Vector2(size.x / 2, size.y / 2),
-      textRenderer: TextPaint(
-        style: TextStyle(
-          color: BasicPalette.white.color,
-          fontSize: 20.0, // Change the font size here
-        ),
-      ),
+    final gameCircleRadius = size.x / 2.5;
+    final centerX = size.x / 2;
+    final centerY = size.y / 1.8;
+
+    gameCircleComponent = CircleComponent(
+      position: Vector2(centerX - gameCircleRadius, centerY - gameCircleRadius),
+      radius: gameCircleRadius,
+      paint: Paint()..color = cbrWhite,
     );
 
-    add(
-      textComponent,
+    bounceBackPlatform = BounceBackPlatform(
+      position: Vector2(centerX - gameCircleRadius, centerY - gameCircleRadius),
+      radius: gameCircleRadius,
+      anglePosition: controllerPosition,
+      platformSize: radFromDegrees(30),
     );
+
+    addAll([gameCircleComponent, bounceBackPlatform]);
   }
 }

@@ -5,6 +5,8 @@ import 'package:flame/game.dart';
 /// Type alias for radians.
 typedef Rad = double;
 
+double ninetyDegreesInRadians = pi / 2;
+
 /// Calculates the angle in radians between two vectors.
 ///
 /// Returns the angle in radians in the range -pi to pi.
@@ -16,6 +18,9 @@ Rad findAngle(Vector2 firstVector, Vector2 secondVector) {
 
   return atan2(det, dot);
 }
+
+/// Converts degrees to radians.
+Rad radFromDegrees(double degrees) => degrees * pi / 180;
 
 extension ConvertToDegrees on Rad {
   double toDegrees() => this * 180 / pi;
