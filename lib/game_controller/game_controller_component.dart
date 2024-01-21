@@ -1,8 +1,8 @@
 import 'package:circle_bricks_breaker/game_controller/bloc/game_controller_bloc.dart';
+import 'package:circle_bricks_breaker/theme/colors.dart';
 import 'package:circle_bricks_breaker/utils/angles.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
-import 'package:flame/image_composition.dart';
 import 'package:flame_bloc/flame_bloc.dart';
 import 'package:flutter/painting.dart';
 
@@ -13,7 +13,7 @@ class GameControllerComponent extends RectangleComponent
   ) {
     size = Vector2(parentSize.x, parentSize.y / 2);
     position = Vector2(0, parentSize.y / 2);
-    paint = Paint()..color = const Color.fromARGB(255, 243, 250, 255);
+    paint = Paint()..color = cbrWhite;
   }
 
   final Vector2 parentSize;
@@ -48,7 +48,7 @@ class DragCircleComponent extends CircleComponent with DragCallbacks {
     this.position = position;
     this.radius = radius;
 
-    paint = Paint()..color = const Color.fromARGB(255, 122, 122, 122);
+    paint = Paint()..color = cbrGrey;
   }
 
   final Function(double) onNewDragPosition;
