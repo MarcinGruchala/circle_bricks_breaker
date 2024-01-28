@@ -32,11 +32,13 @@ class BallComponent extends CircleComponent with CollisionCallbacks {
     }
     if (other is BounceBackPlatform) {
       final isCollisionWithPlatform =
-          other.isCollisionWithPlatform(position + Vector2(radius, radius));
+          other.getCollisionDeviationFromPlatformCenter(
+        position + Vector2(radius, radius),
+      );
       log('BallComponent collision:\n'
           'collision intersection: $intersectionPoints\n'
           'ball position: $position \n'
-          'with platform: $isCollisionWithPlatform,\n');
+          'deviation: $isCollisionWithPlatform,\n');
       _moveVector = Vector2(-1, _moveVector.y);
     }
   }

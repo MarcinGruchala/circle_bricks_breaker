@@ -57,8 +57,10 @@ class BounceBackPlatform extends CircleComponent {
 }
 
 extension CollisionUtils on BounceBackPlatform {
-  //TODO: add collision with intersection points
-  bool isCollisionWithPlatform(Vector2 ballPosition) {
+  //TODO: calculate this based on intersection points
+  /// Returns the deviation of the ball from the center of the platform.
+  /// Returns null if there is no collision.
+  double? getCollisionDeviationFromPlatformCenter(Vector2 ballPosition) {
     final vectorToBallPosition = Vector2(
       ballPosition.x - centerPosition.x,
       ballPosition.y - centerPosition.y,
@@ -68,8 +70,12 @@ extension CollisionUtils on BounceBackPlatform {
 
     if (ballAnglePosition >= anglePosition - platformSize &&
         ballAnglePosition <= anglePosition + platformSize) {
-      return true;
+      final percentageDeviation =
+          (ballAnglePosition - anglePosition) / (platformSize / 2);
+
+      return percentageDeviation;
     }
-    return false;
+
+    return null;
   }
 }
