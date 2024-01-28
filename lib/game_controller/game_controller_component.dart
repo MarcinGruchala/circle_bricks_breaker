@@ -43,8 +43,7 @@ class DragCircleComponent extends CircleComponent with DragCallbacks {
     required Vector2 position,
     required double radius,
     required this.onNewDragPosition,
-  })  : _localCircleCenter = Vector2(radius, radius),
-        _startVextor = Vector2(0, -radius) {
+  }) : _localCircleCenter = Vector2(radius, radius) {
     this.position = position;
     this.radius = radius;
 
@@ -54,7 +53,6 @@ class DragCircleComponent extends CircleComponent with DragCallbacks {
   final Function(double) onNewDragPosition;
 
   final Vector2 _localCircleCenter;
-  final Vector2 _startVextor;
 
   Rad _findAngleToDragPoint(Vector2 dragPoint) {
     final vectorToDragPoint = Vector2(
@@ -62,7 +60,7 @@ class DragCircleComponent extends CircleComponent with DragCallbacks {
       dragPoint.y - _localCircleCenter.y,
     );
     return findAngle(
-      _startVextor,
+      horizontalVector,
       vectorToDragPoint,
     );
   }

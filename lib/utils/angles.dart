@@ -5,7 +5,7 @@ import 'package:flame/game.dart';
 /// Type alias for radians.
 typedef Rad = double;
 
-double ninetyDegreesInRadians = pi / 2;
+Vector2 horizontalVector = Vector2(100, 0);
 
 /// Calculates the angle in radians between two vectors.
 ///
